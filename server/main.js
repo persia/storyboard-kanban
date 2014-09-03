@@ -18,25 +18,25 @@ Meteor.methods({
 
 Meteor.startup(function () {
 
-    if ( Lists.find().count() === 0 ) {
-        Lists.insert({
-            name: 'Todo',
-            order: 1
-        });
-        Lists.insert({
-            name: 'Inprogress',
-            order: 2
-        });
-        Lists.insert({
-            name: 'Review',
-            order: 3
-        });
-        Lists.insert({
-            name: 'Merged',
-            order: 4
-        });
-    }
-    if (Cards.find().count() === 0 ) {
-    	Cards.insert({num: 0});
-    }
+	if ( Lists.find().count() === 0 ) {
+		Lists.insert({
+			name: 'Todo',
+			order: 1
+        	});
+       		Lists.insert({
+			name: 'Inprogress',
+			order: 2
+        	});
+        	Lists.insert({
+        	    	name: 'Review',
+        	    	order: 3
+        	});
+        	Lists.insert({
+        		name: 'Merged',
+            		order: 4
+        	});
+    	}
+    	if (Cards.find().count() === 0 ) {
+    		Cards.insert({num: 0});
+    	}
 });

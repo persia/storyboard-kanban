@@ -32,5 +32,5 @@ var story_id = getUrlVars()["id"];
 
 Meteor.call("fetchFromService", function (error, result) { 
       if (error) console.log(error);
-      else alert('response: ', result);
+      else alert(result);
 });
