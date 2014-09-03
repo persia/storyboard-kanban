@@ -3,11 +3,13 @@ Meteor.methods({
 		var url = "http://10.24.2.125:9000/api/v1/tasks";
 		//synchronous GET
 		var result = Meteor.http.get(url, {timeout:30000});
-		return result.content;
 		if(result.statusCode==200) {
 			var respJson = JSON.parse(result.content);
 			console.log("response received.");
-			return result.content;
+			for(var i=0;i<respJson.length;i++){
+				Cards.insert(respJson[i])
+			}
+			return respJson;
 		} else {
 			console.log("Response issue: ", result.statusCode);
 			var errorJson = JSON.parse(result.content);
@@ -35,8 +37,5 @@ Meteor.startup(function () {
 			name: 'Merged',
 			order: 4
 		});
-	}
-	if (Cards.find().count() === 0 ) {
-		Cards.insert({num: 0});
 	}
 });
