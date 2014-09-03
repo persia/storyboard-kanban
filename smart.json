@@ -1,0 +1,8 @@
+{
+  "packages": {
+    "roles": {},
+    "router": {},
+    "iron-router": {},
+    "collection-api": {}
+  }
+}

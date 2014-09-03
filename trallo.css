@@ -1,0 +1,71 @@
+li {
+    font-family: Arial;
+    color: white;
+    list-style: none;
+    font-size: 16px;
+}
+
+li a {
+    float: right;
+    margin: 3px ;
+    font-size: 12px;
+}
+
+ul {
+    padding: 10px ;
+}
+
+h2 {
+    font-family: Arial;
+    color: white;
+    font-size: 18px ;
+}
+
+h4 {
+    font-family: Arial;
+    color: white;
+    line-height: 0;
+}
+h5 {
+    font-family: Arial;
+    color: white;
+    line-height: 1;
+}
+
+.list {
+    width: 300px ;
+    float: left;
+    padding: 2px 8px ;
+    background-color: #c43422;
+    margin: 10px ;
+    border: 1px solid #666 ;
+    border-radius: 7px ;
+}
+
+.top {
+	font-family: Arial;
+        color: white;
+	background-color: #c43422;
+	height: 50px;
+    	width: 100%;
+}
+
+.card {
+    border-radius: 3px ;
+    border: 1px solid #666 ;
+    margin: 5px ;
+    padding: 4px ;
+    word-wrap: break-word;
+    background-color: #f2a09a;
+}
+
+.ui-state-highlight {
+    width: 300px ;
+    height: 300px ;
+    float: left;
+    padding: 2px 8px ;
+    background-color: #999 ;
+    margin: 10px ;
+    border: 1px solid #666 ;
+    border-radius: 7px ;
+}
