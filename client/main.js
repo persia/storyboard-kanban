@@ -21,7 +21,7 @@ Template.board.helpers({
 Template.list.cards = function(status) {
 	return Cards.find(
 		{status: status},
-                {sort: {position: 1, task: 1}}
+		{sort: {position: 1, task: 1}}
 	);
 };
 
@@ -29,7 +29,7 @@ Template.list.cards = function(status) {
 var story_id = getUrlVars()["id"];
 //TODO get story_id name
 
-Meteor.call("fetchFromService", function (error, result) { 
+Meteor.call("fetchTask", function (error, result) { 
 	if (error) console.log(error);
 	else alert(result);
 });

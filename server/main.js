@@ -1,11 +1,11 @@
 Meteor.methods({
-	fetchFromService: function() {
+	fetchTask: function() {
 		var url = "http://10.24.2.125:9000/api/v1/tasks";
 		//synchronous GET
 		var result = Meteor.http.get(url, {timeout:30000});
 		return result.content;
 		if(result.statusCode==200) {
-			//var respJson = JSON.parse(result.content);
+			var respJson = JSON.parse(result.content);
 			console.log("response received.");
 			return result.content;
 		} else {
