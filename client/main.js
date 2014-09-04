@@ -33,7 +33,8 @@ Template.title.storyName = function() {
 	return Stories.findOne({id: story_id}).title;
 };
 
-Meteor.call("fetchTask", "story_id", "2", function (error, result) {
+var story_id = getUrlVars()["id"];
+Meteor.call("fetchTask", "story_id", story_id, function (error, result) {
 	if (error) console.log(error);
 	//else alert(result);
 });
