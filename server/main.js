@@ -1,9 +1,9 @@
 Meteor.methods({
 
-	fetchTask: function() {
-		var url = "http://10.24.2.125:9000/api/v1/tasks";
+	fetchTask: function(pParam, pValue) {
+		var url = "http://10.24.2.125:9000/api/v1/tasks" + "?" + pParam + "=" + pValue;
 		//synchronous GET
-		var result = Meteor.http.get(url, {timeout:30000});
+		var result = Meteor.http.get(url,{timeout:30000});
 		if(result.statusCode==200) {
 			Cards.remove({});
 			var respJson = JSON.parse(result.content);
