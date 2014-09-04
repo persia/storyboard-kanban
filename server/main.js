@@ -4,9 +4,11 @@ Meteor.methods({
 		//synchronous GET
 		var result = Meteor.http.get(url, {timeout:30000});
 		if(result.statusCode==200) {
+			Cards.remove({});
 			var respJson = JSON.parse(result.content);
 			console.log("response received.");
 			for(var i=0;i<respJson.length;i++){
+				respJson[i]["position"] = i+1;
 				Cards.insert(respJson[i])
 			}
 			return respJson;
@@ -22,19 +24,19 @@ Meteor.startup(function () {
 
 	if ( Lists.find().count() === 0 ) {
 		Lists.insert({
-			name: 'Todo',
+			name: 'todo',
 			order: 1
 		});
 		Lists.insert({
-			name: 'Inprogress',
+			name: 'inprogress',
 			order: 2
 		});
 		Lists.insert({
-			name: 'Review',
+			name: 'review',
 			order: 3
 		});
 		Lists.insert({
-			name: 'Merged',
+			name: 'merged',
 			order: 4
 		});
 	}

@@ -23,12 +23,12 @@ h2 {
 
 h4 {
     font-family: Arial;
-    color: white;
+    color: black;
     line-height: 0;
 }
 h5 {
     font-family: Arial;
-    color: white;
+    color: black;
     line-height: 1;
 }
 
@@ -56,7 +56,7 @@ h5 {
     margin: 5px ;
     padding: 4px ;
     word-wrap: break-word;
-    background-color: #f2a09a;
+    background-color: #f9f9f9;
 }
 
 .ui-state-highlight {
