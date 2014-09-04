@@ -1,7 +1,7 @@
 Meteor.subscribe('cards');
 Meteor.subscribe('lists');
 
-/*function getUrlVars() {
+function getUrlVars() {
 	var vars = [], hash;
 	var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
 	for(var i = 0; i < hashes.length; i++) {
@@ -15,7 +15,7 @@ Meteor.subscribe('lists');
 		}
 	}
 	return vars;
-}*/
+}
 
 Template.board.helpers({
 	lists: Lists.find({}, {sort: {order: 1}})
@@ -28,9 +28,10 @@ Template.list.cards = function(status) {
             );
 };
 
-// populate cards on page load
-//var story_id = getUrlVars()["id"];
-//TODO get story_id name
+Template.title.storyName = function() {
+	var story_id = getUrlVars()["id"];
+	return Stories.findOne({id: story_id}).title;
+};
 
 Meteor.call("fetchTask", function (error, result) { 
 	if (error) console.log(error);

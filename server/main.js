@@ -9,8 +9,16 @@ Meteor.methods({
 			var respJson = JSON.parse(result.content);
 			console.log("response received.");
 			for(var i=0;i<respJson.length;i++){
-				respJson[i]["position"] = i+1;
-				Cards.insert(respJson[i])
+				task=respJson[i];
+				task["position"] = i+1;
+				task["project_name"] = Projects.findOne({id: task.project_id}).name;
+				if(task.assignee_id){
+					task["user_name"] = Users.findOne({id: task.assignee_id}).username;
+				}
+				else {
+					task["user_name"] = "None";
+				}
+				Cards.insert(task)
 			}
 			return respJson;
 		} else {
@@ -42,7 +50,7 @@ Meteor.methods({
 
 Meteor.startup(function () {
 
-	// fetch story names and usernames on startup 
+	// fetch stories, projects and users
 	Meteor.call("fetchAPI", "stories" , function (error, result) { 
 		if (error) console.log(error);
 		else console.log("stories fetched");
@@ -51,6 +59,11 @@ Meteor.startup(function () {
 		if (error) console.log(error);
 		else console.log("users fetched");
 	});
+	Meteor.call("fetchAPI", "projects" , function (error, result) { 
+		if (error) console.log(error);
+		else console.log("projects fetched");
+	});
+	// create lanes
 	if ( Lists.find().count() === 0 ) {
 		Lists.insert({
 			name: 'todo',
