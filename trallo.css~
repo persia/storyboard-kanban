@@ -1,0 +1,74 @@
+li {
+    font-family: Arial;
+    color: white;
+    list-style: none;
+    font-size: 16px;
+}
+
+li a {
+    float: right;
+    margin: 3px ;
+    font-size: 12px;
+}
+
+ul {
+    padding: 10px ;
+}
+
+h2 {
+    font-family: Arial;
+    color: white;
+    font-size: 18px ;
+    word-wrap: break-word;
+}
+
+h4 {
+    font-family: Arial;
+    color: black;
+    line-height: 0;
+    word-wrap: break-word;
+}
+h5 {
+    font-family: Arial;
+    color: black;
+    line-height: 1;
+    word-wrap: normal;
+}
+
+.list {
+    width: 300px ;
+    float: left;
+    padding: 2px 8px ;
+    background-color: #c43422;
+    margin: 10px ;
+    border: 1px solid #666 ;
+    border-radius: 7px ;
+}
+
+.top {
+	font-family: Arial;
+        color: white;
+	background-color: #c43422;
+	height: 50px;
+    	width: 100%;
+}
+
+.card {
+    border-radius: 3px ;
+    border: 1px solid #666 ;
+    margin: 5px ;
+    padding: 4px ;
+    word-wrap: normal;
+    background-color: #f9f9f9;
+}
+
+.ui-state-highlight {
+    width: 300px ;
+    height: 300px ;
+    float: left;
+    padding: 2px 8px ;
+    background-color: #999 ;
+    margin: 10px ;
+    border: 1px solid #666 ;
+    border-radius: 7px ;
+}
