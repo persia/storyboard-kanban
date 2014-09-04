@@ -25,6 +25,7 @@ h4 {
     font-family: Arial;
     color: black;
     line-height: 0;
+    word-wrap: break-word;
 }
 h5 {
     font-family: Arial;
