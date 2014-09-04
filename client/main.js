@@ -34,7 +34,15 @@ Template.title.storyName = function() {
 };
 
 var story_id = getUrlVars()["id"];
-Meteor.call("fetchTask", "story_id", story_id, function (error, result) {
-	if (error) console.log(error);
-	//else alert(result);
-});
+if(story_id) {
+	Meteor.call("fetchTask", "story_id", story_id, function (error, result) {
+		if (error) console.log(error);
+		//else alert(result);
+	});
+}
+else {
+	Meteor.call("fetchAPI", "tasks", function (error, result) {
+		if (error) console.log(error);
+		//else alert(result);
+	});
+}
