@@ -11,7 +11,12 @@ Meteor.methods({
 			for(var i=0;i<respJson.length;i++){
 				task=respJson[i];
 				task["position"] = i+1;
-				task["project_name"] = Projects.findOne({id: task.project_id}).name;
+				if(task.project_id){
+					task["project_name"] = Projects.findOne({id: task.project_id}).name;
+				}
+				else {
+					task["project_name"] = "None";
+				}
 				if(task.assignee_id){
 					task["user_name"] = Users.findOne({id: task.assignee_id}).username;
 				}
