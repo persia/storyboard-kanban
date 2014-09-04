@@ -17,7 +17,7 @@ ul {
 
 h2 {
     font-family: Arial;
-    color: white;
+    color: black;
     font-size: 18px ;
 }
 
@@ -35,10 +35,8 @@ h5 {
     width: 300px ;
     float: left;
     padding: 2px 8px ;
-    background-color: #c43422;
+    background-color: white;
     margin: 10px ;
-    border: 1px solid #666 ;
-    border-radius: 7px ;
 }
 
 .top {
@@ -50,8 +48,6 @@ h5 {
 }
 
 .card {
-    border-radius: 3px ;
-    border: 1px solid #666 ;
     margin: 5px ;
     padding: 4px ;
     word-wrap: break-word;
