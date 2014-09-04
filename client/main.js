@@ -30,8 +30,11 @@ Template.list.cards = function(status) {
 };
 
 Template.page_title.helpers({
+	id : function() {
+		return getUrlVars()["id"];
+	},
 	title: function () {
-		return Stories.findOne({id: 2}).title;
+		return Stories.findOne({id: this.id}).title;
 	}
 });
 
