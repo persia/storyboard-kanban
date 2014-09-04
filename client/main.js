@@ -41,7 +41,7 @@ if(story_id) {
 	});
 }
 else {
-	Meteor.call("fetchAPI", "tasks", function (error, result) {
+	Meteor.call("fetchAllTasks", function (error, result) {
 		if (error) console.log(error);
 		//else alert(result);
 	});

@@ -32,6 +32,40 @@ Meteor.methods({
 			throw new Meteor.Error(result.statusCode, errorJson.error);
 		}
 	},
+
+	fetchAllTasks: function() {
+		var url = "http://10.24.2.125:9000/api/v1/tasks";
+		//synchronous GET
+		var result = Meteor.http.get(url,{timeout:30000});
+		if(result.statusCode==200) {
+			Cards.remove({});
+			var respJson = JSON.parse(result.content);
+			console.log("response received.");
+			for(var i=0;i<respJson.length;i++){
+				task=respJson[i];
+				task["position"] = i+1;
+				if(task.project_id){
+					task["project_name"] = Projects.findOne({id: task.project_id}).name;
+				}
+				else {
+					task["project_name"] = "None";
+				}
+				if(task.assignee_id){
+					task["user_name"] = Users.findOne({id: task.assignee_id}).username;
+				}
+				else {
+					task["user_name"] = "None";
+				}
+				Cards.insert(task)
+			}
+			return respJson;
+		} else {
+			console.log("Response issue: ", result.statusCode);
+			var errorJson = JSON.parse(result.content);
+			throw new Meteor.Error(result.statusCode, errorJson.error);
+		}
+	},
+
 	fetchAPI: function(message) {
 		var url = "http://10.24.2.125:9000/api/v1/" + message;
 		//synchronous GET
