@@ -29,16 +29,15 @@ Template.list.cards = function(status) {
             );
 };
 
+story_id = getUrlVars()["id"];
+
 Template.page_title.helpers({
-	id : function() {
-		return getUrlVars()["id"];
-	},
 	title: function () {
-		return Stories.findOne({id: this.id}).title;
+		story_id = parseInt(getUrlVars()["id"]); 
+		return Stories.findOne({"id":story_id}).title;
 	}
 });
 
-var story_id = getUrlVars()["id"];
 if(story_id) {
 	Meteor.call("fetchTask", "story_id", story_id, function (error, result) {
 		if (error) console.log(error);
