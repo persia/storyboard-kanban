@@ -1,5 +1,6 @@
 Meteor.subscribe('cards');
 Meteor.subscribe('lists');
+Meteor.subscribe('stories');
 
 function getUrlVars() {
 	var vars = [], hash;
@@ -28,10 +29,11 @@ Template.list.cards = function(status) {
             );
 };
 
-Template.title.storyName = function() {
-	var story_id = getUrlVars()["id"];
-	return Stories.findOne({id: story_id}).title;
-};
+Template.page_title.helpers({
+	story: function () {
+		return Stories.findOne({id: 2});
+	}
+});
 
 var story_id = getUrlVars()["id"];
 if(story_id) {
