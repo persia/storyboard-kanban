@@ -2,7 +2,9 @@ Meteor.subscribe('cards');
 Meteor.subscribe('lists');
 Meteor.subscribe('stories');
 
-story_id = getUrlVars()["id"];
+story_id = parseInt(getUrlVars()["id"]);
+if(story_id == NaN)
+	story_id = 0;
 
 function getUrlVars() {
 	var vars = [], hash;
@@ -34,7 +36,7 @@ Template.list.cards = function(status) {
 Template.page_title.helpers({
 	title: function () {
 		if(story_id)
-			return Stories.findOne({"id": parseInt(story_id)}).title;
+			return Stories.findOne({"id": story_id}).title;
 		else
 			return "All Tasks";
 	}
