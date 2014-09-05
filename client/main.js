@@ -2,6 +2,8 @@ Meteor.subscribe('cards');
 Meteor.subscribe('lists');
 Meteor.subscribe('stories');
 
+story_id = getUrlVars()["id"];
+
 function getUrlVars() {
 	var vars = [], hash;
 	var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
@@ -29,12 +31,12 @@ Template.list.cards = function(status) {
             );
 };
 
-story_id = getUrlVars()["id"];
-
 Template.page_title.helpers({
 	title: function () {
-		story_id = parseInt(getUrlVars()["id"]); 
-		return Stories.findOne({"id":story_id}).title;
+		if(story_id)
+			return Stories.findOne({"id": parseInt(story_id)}).title;
+		else
+			return "All Tasks";
 	}
 });
 
