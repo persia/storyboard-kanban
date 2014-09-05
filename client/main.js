@@ -68,7 +68,7 @@ Template.story_menu.events({
 		}
 		else {
 			filterType = "";
-			Session.set('currentTitle', "Test");
+			Session.set('currentTitle', "All Tasks");
 			Meteor.call("fetchAllTasks", function (error, result) {
 				if (error) console.log(error);
 			});
