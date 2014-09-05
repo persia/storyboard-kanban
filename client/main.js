@@ -38,7 +38,7 @@ Template.page_title.helpers({
 			if(story_doc)
 				return story_doc.title;
 			else
-				return "Cannot Find Task";
+				return "Cannot Find Story";
 		}
 		else
 			return "All Tasks";
