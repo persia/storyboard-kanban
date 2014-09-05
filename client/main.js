@@ -3,8 +3,6 @@ Meteor.subscribe('lists');
 Meteor.subscribe('stories');
 
 story_id = parseInt(getUrlVars()["id"]);
-if(story_id == NaN)
-	story_id = 0;
 
 function getUrlVars() {
 	var vars = [], hash;
