@@ -35,23 +35,28 @@ h5 {
     width: 300px ;
     float: left;
     padding: 2px 8px ;
-    background-color: white;
     margin: 10px ;
+}
+
+.menu {
+	color: white;
+	background-color: #444;
+	padding: 4px 8px ;
 }
 
 .top {
 	font-family: Arial;
-        color: white;
+	color: white;
 	background-color: #c43422;
+	padding: 8px;
 	height: 50px;
-    	width: 100%;
 }
 
 .card {
     margin: 5px ;
     padding: 4px ;
     word-wrap: break-word;
-    background-color: #f9f9f9;
+    background-color: #eee;
 }
 
 .ui-state-highlight {
