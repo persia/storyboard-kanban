@@ -4,6 +4,7 @@ Meteor.subscribe('stories');
 
 story_id = parseInt(getUrlVars()["id"]);
 story_url = "http://10.24.2.125:9000/#!/story/";
+filterType = "";
 
 function getUrlVars() {
 	var vars = [], hash;
@@ -25,25 +26,36 @@ Template.board.helpers({
 	lists: Lists.find({}, {sort: {order: 1}})
 });
 
+Template.card.helpers({
+	otherType: function(card) {
+		if(filterType == "story")
+			return "Project: " + card.project_name;
+		else
+			return "Story: " + card.story_name;
+	}
+});
+
 Template.story_menu.helpers({
 	stories: Stories.find({}),
 	projects: Projects.find({})
-	
 });
 
 Template.story_menu.events({
 	'change select': function(evt){
 		if($(evt.target).val() > 0) {
+			filterType = "story";
 			Meteor.call("fetchTask", "story_id", $(evt.target).val(), function (error, result) {
 			if (error) console.log(error);
 			});
 		}
 		else if($(evt.target).val() < 0) {
+			filterType = "project";
 			Meteor.call("fetchTaskByProject", -1 * $(evt.target).val(), function (error, result) {
 			if (error) console.log(error);
 			});
 		}
 		else {
+			filterType = "";
 			Meteor.call("fetchAllTasks", function (error, result) {
 				if (error) console.log(error);
 			});
