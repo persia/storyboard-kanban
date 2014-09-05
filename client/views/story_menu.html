@@ -1,6 +1,7 @@
 <template name="story_menu">
-<select>
-	<option value="-1">All Tasks</option>
+Story Filter:
+<select id="storypicker">
+	<option value="0">All Tasks</option>
 	{{#each stories}}
 		<option value="{{ id }}">{{ title }}</option>
 	{{/each }}

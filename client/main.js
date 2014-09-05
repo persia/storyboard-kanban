@@ -29,6 +29,22 @@ Template.story_menu.helpers({
 	stories: Stories.find({}, {sort: {order: 1}})
 });
 
+Template.story_menu.events({
+	'change select': function(evt){
+		alert($(evt.target).val());
+		if($(evt.target).val()) {
+			Meteor.call("fetchTask", "story_id", $(evt.target).val(), function (error, result) {
+			if (error) console.log(error);
+			});
+		}
+		else {
+			Meteor.call("fetchAllTasks", function (error, result) {
+				if (error) console.log(error);
+			});
+		}
+	}
+});
+
 Template.list.cards = function(status) {
 	list_name = Lists.findOne({_id: status}).name;
 	return Cards.find({status: list_name},
