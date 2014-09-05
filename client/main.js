@@ -3,6 +3,7 @@ Meteor.subscribe('lists');
 Meteor.subscribe('stories');
 
 story_id = parseInt(getUrlVars()["id"]);
+story_url = "http://10.24.2.125:9000/#!/story/";
 
 function getUrlVars() {
 	var vars = [], hash;
@@ -42,6 +43,16 @@ Template.page_title.helpers({
 		}
 		else
 			return "All Tasks";
+	}
+});
+
+Template.link.helpers({
+	link: function () {
+		story_doc = Stories.findOne({"id": story_id});
+		if(story_doc)
+			return story_url + story_id;
+		else
+			return story_url + "list";
 	}
 });
 
