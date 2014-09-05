@@ -1,5 +1,0 @@
-<template name="card">
-    <li id="{{ _id }}" class="card ui-state-default" data-status="{{ status }}">
-        <h4>{{ title }}</h4> <h5>{{ otherType(card) }}<br>assignee: {{ user_name }} </h5>
-    </li>
-</template>
