@@ -1,7 +1,8 @@
 Meteor.subscribe('cards');
 Meteor.subscribe('lists');
+Meteor.subscribe('stories');
 
-/*function getUrlVars() {
+function getUrlVars() {
 	var vars = [], hash;
 	var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
 	for(var i = 0; i < hashes.length; i++) {
@@ -15,7 +16,7 @@ Meteor.subscribe('lists');
 		}
 	}
 	return vars;
-}*/
+}
 
 Template.board.helpers({
 	lists: Lists.find({}, {sort: {order: 1}})
@@ -28,11 +29,24 @@ Template.list.cards = function(status) {
             );
 };
 
-// populate cards on page load
-//var story_id = getUrlVars()["id"];
-//TODO get story_id name
+story_id = getUrlVars()["id"];
 
-Meteor.call("fetchTask", function (error, result) { 
-	if (error) console.log(error);
-	//else alert(result);
+Template.page_title.helpers({
+	title: function () {
+		story_id = parseInt(getUrlVars()["id"]); 
+		return Stories.findOne({"id":story_id}).title;
+	}
 });
+
+if(story_id) {
+	Meteor.call("fetchTask", "story_id", story_id, function (error, result) {
+		if (error) console.log(error);
+		//else alert(result);
+	});
+}
+else {
+	Meteor.call("fetchAllTasks", function (error, result) {
+		if (error) console.log(error);
+		//else alert(result);
+	});
+}
