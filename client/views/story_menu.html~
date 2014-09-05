@@ -1,0 +1,12 @@
+<template name="story_menu">
+Filter Kanban:
+<select id="storypicker">
+	<option value="0">All Tasks</option>
+	{{#each stories}}
+		<option value="{{ id }}">Stories: {{ title }}</option>
+	{{/each }}
+	{{#each projects}}
+		<option value="{{ neg_id }}">Projects: {{ name }}</option>
+	{{/each }}
+</select>
+</template>

@@ -1,0 +1,3 @@
+<template name="link">
+	<a {{ link }}>storyboard</a>
+</template>

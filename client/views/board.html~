@@ -1,8 +1,6 @@
 <template name="board">
-    <div>
-        <h2><a class="add_card" href="#">Add a card</a></h2>
-    </div>
-    {{#each lists }}
-    {{> list}}
-    {{/each }}
-    </template>
+	{{#each lists }}
+	{{> list}}
+	{{/each }}
+	where am i
+</template>
