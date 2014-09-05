@@ -3,6 +3,16 @@ Meteor.subscribe('lists');
 Meteor.subscribe('stories');
 
 story_id = parseInt(getUrlVars()["id"]);
+if(story_id) {
+	story_doc = Stories.findOne({"id": story_id});
+	if(story_doc)
+		Session.set('currentTitle', story_doc.title);
+	else
+		Session.set('currentTitle', "Cannot Find Story");
+}
+else
+	Session.set('currentTitle', "All Tasks");
+
 story_url = "http://10.24.2.125:9000/#!/story/";
 filterType = "";
 
@@ -46,16 +56,19 @@ Template.story_menu.events({
 			filterType = "story";
 			Meteor.call("fetchTask", "story_id", $(evt.target).val(), function (error, result) {
 			if (error) console.log(error);
+			Session.set('currentTitle', Stories.findOne({"id": parseInt($(evt.target).val())}).title);
 			});
 		}
 		else if($(evt.target).val() < 0) {
 			filterType = "project";
 			Meteor.call("fetchTaskByProject", -1 * $(evt.target).val(), function (error, result) {
 			if (error) console.log(error);
+			Session.set('currentTitle', Projects.findOne({"id": parseInt($(evt.target).val()) * -1}).name);
 			});
 		}
 		else {
 			filterType = "";
+			Session.set('currentTitle', "Test");
 			Meteor.call("fetchAllTasks", function (error, result) {
 				if (error) console.log(error);
 			});
@@ -72,15 +85,7 @@ Template.list.cards = function(status) {
 
 Template.page_title.helpers({
 	title: function () {
-		if(story_id) {
-			story_doc = Stories.findOne({"id": story_id});
-			if(story_doc)
-				return story_doc.title;
-			else
-				return "Cannot Find Story";
-		}
-		else
-			return "All Tasks";
+		return Session.get('currentTitle');
 	}
 });
 
