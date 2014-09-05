@@ -33,8 +33,13 @@ Template.list.cards = function(status) {
 
 Template.page_title.helpers({
 	title: function () {
-		if(story_id)
-			return Stories.findOne({"id": story_id}).title;
+		if(story_id) {
+			story_doc = Stories.findOne({"id": story_id});
+			if(story_doc)
+				return story_doc.title;
+			else
+				return "Cannot Find Task";
+		}
 		else
 			return "All Tasks";
 	}
