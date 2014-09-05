@@ -31,7 +31,7 @@ Template.card.helpers({
 		if(filterType == "story")
 			return "Project: " + this.project_name;
 		else
-			return "Story: " + this.story_name;
+			return "Story: " + this.story_title;
 	}
 });
 
