@@ -25,6 +25,10 @@ Template.board.helpers({
 	lists: Lists.find({}, {sort: {order: 1}})
 });
 
+Template.story_menu.helpers({
+	stories: Stories.find({}, {sort: {order: 1}})
+});
+
 Template.list.cards = function(status) {
 	list_name = Lists.findOne({_id: status}).name;
 	return Cards.find({status: list_name},
