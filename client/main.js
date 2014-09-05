@@ -26,14 +26,20 @@ Template.board.helpers({
 });
 
 Template.story_menu.helpers({
-	stories: Stories.find({}, {sort: {order: 1}})
+	stories: Stories.find({}),
+	projects: Projects.find({})
+	
 });
 
 Template.story_menu.events({
 	'change select': function(evt){
-		alert($(evt.target).val());
-		if($(evt.target).val()) {
+		if($(evt.target).val() > 0) {
 			Meteor.call("fetchTask", "story_id", $(evt.target).val(), function (error, result) {
+			if (error) console.log(error);
+			});
+		}
+		else if($(evt.target).val() < 0) {
+			Meteor.call("fetchTaskByProject", -1 * $(evt.target).val(), function (error, result) {
 			if (error) console.log(error);
 			});
 		}
