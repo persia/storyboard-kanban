@@ -11,18 +11,18 @@ Meteor.methods({
 			for(var i=0;i<respJson.length;i++){
 				task=respJson[i];
 				task["position"] = i+1;
-				if(task.project_id){
+				if(task.project_id)
 					task["project_name"] = Projects.findOne({id: task.project_id}).name;
-				}
-				else {
+				else 
 					task["project_name"] = "None";
-				}
-				if(task.assignee_id){
+				if(task.assignee_id)
 					task["user_name"] = Users.findOne({id: task.assignee_id}).username;
-				}
-				else {
+				else
 					task["user_name"] = "None";
-				}
+				if(task.story_id)
+					task["story_title"] = Stories.findOne({id: task.story_id}).title;
+				else
+					task["story_title"] = "None";
 				Cards.insert(task)
 			}
 			return respJson;
@@ -44,18 +44,18 @@ Meteor.methods({
 			for(var i=0;i<respJson.length;i++){
 				task=respJson[i];
 				task["position"] = i+1;
-				if(task.project_id){
+				if(task.project_id)
 					task["project_name"] = Projects.findOne({id: task.project_id}).name;
-				}
-				else {
+				else
 					task["project_name"] = "None";
-				}
-				if(task.assignee_id){
+				if(task.assignee_id)
 					task["user_name"] = Users.findOne({id: task.assignee_id}).username;
-				}
-				else {
+				else
 					task["user_name"] = "None";
-				}
+				if(task.story_id)
+					task["story_title"] = Stories.findOne({id: task.story_id}).title;
+				else
+					task["story_title"] = "None";
 				Cards.insert(task)
 			}
 			return respJson;
@@ -84,6 +84,10 @@ Meteor.methods({
 						task["user_name"] = Users.findOne({id: task.assignee_id}).username;
 					else
 						task["user_name"] = "None";
+					if(task.story_id)
+						task["story_title"] = Stories.findOne({id: task.story_id}).title;
+					else
+						task["story_title"] = "None";
 					Cards.insert(task)
 				}
 			}
