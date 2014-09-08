@@ -54,33 +54,36 @@ Template.story_menu.events({
 	'change select': function(evt){
 		if($(evt.target).val() > 0) {
 			filterType = "story";
-			Meteor.call("fetchTask", "story_id", $(evt.target).val(), function (error, result) {
-			if (error) console.log(error);
+			Session.set('currentID' , parseInt($(evt.target).val()));
 			Session.set('currentTitle', Stories.findOne({"id": parseInt($(evt.target).val())}).title);
-			});
 		}
 		else if($(evt.target).val() < 0) {
 			filterType = "project";
-			Meteor.call("fetchTaskByProject", -1 * $(evt.target).val(), function (error, result) {
-			if (error) console.log(error);
+			Session.set('currentID' , parseInt($(evt.target).val()));
 			Session.set('currentTitle', Projects.findOne({"id": parseInt($(evt.target).val()) * -1}).name);
-			});
 		}
 		else {
 			filterType = "";
+			Session.set('currentID' , 0);
 			Session.set('currentTitle', "All Tasks");
-			Meteor.call("fetchAllTasks", function (error, result) {
-				if (error) console.log(error);
-			});
 		}
 	}
 });
 
 Template.list.cards = function(status) {
-	list_name = Lists.findOne({_id: status}).name;
-	return Cards.find({status: list_name},
-		{sort: {position: 1, task: 1}}
-            );
+	id = Session.get('currentID')
+	list_name = Lists.findOne({_id: status, }).name;
+	if (id > 0) {
+		return Cards.find({status: list_name, story_id: id},
+			{sort: {position: 1, task: 1}}
+		);
+	}
+	else if ( id <0 ) {
+		return Cards.find({status: list_name, project_id: id * -1},
+			{sort: {position: 1, task: 1}}
+		);
+	}
+	return Cards.find({status: list_name});
 };
 
 Template.page_title.helpers({
