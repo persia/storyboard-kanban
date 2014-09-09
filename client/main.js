@@ -1,3 +1,8 @@
+Meteor.subscribe('cards')
+Meteor.subscribe('projects')
+Meteor.subscribe('stories')
+Meteor.subscribe('users')
+
 function setIDandTitle(id) {
 	if(id > 0) {
 		filterType = "story";
