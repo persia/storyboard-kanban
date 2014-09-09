@@ -1,41 +1,6 @@
 Meteor.methods({
-
-	fetchTask: function(pParam, pValue) {
-		var url = "http://10.24.2.125:9000/api/v1/tasks" + "?" + pParam + "=" + pValue;
-		//synchronous GET
-		var result = Meteor.http.get(url,{timeout:30000});
-		if(result.statusCode==200) {
-			Cards.remove({});
-			var respJson = JSON.parse(result.content);
-			console.log("response received.");
-			for(var i=0;i<respJson.length;i++){
-				task=respJson[i];
-				task["position"] = i+1;
-				if(task.project_id)
-					task["project_name"] = Projects.findOne({id: task.project_id}).name;
-				else 
-					task["project_name"] = "None";
-				if(task.assignee_id)
-					task["user_name"] = Users.findOne({id: task.assignee_id}).username;
-				else
-					task["user_name"] = "None";
-				if(task.story_id)
-					task["story_title"] = Stories.findOne({id: task.story_id}).title;
-				else
-					task["story_title"] = "None";
-				Cards.insert(task)
-			}
-			return respJson;
-		} else {
-			console.log("Response issue: ", result.statusCode);
-			var errorJson = JSON.parse(result.content);
-			throw new Meteor.Error(result.statusCode, errorJson.error);
-		}
-	},
-
 	fetchAllTasks: function() {
 		var url = "http://10.24.2.125:9000/api/v1/tasks";
-		//synchronous GET
 		var result = Meteor.http.get(url,{timeout:30000});
 		if(result.statusCode==200) {
 			Cards.remove({});
@@ -58,20 +23,20 @@ Meteor.methods({
 					task["story_title"] = "None";
 				Cards.insert(task)
 			}
-			return respJson;
 		} else {
 			console.log("Response issue: ", result.statusCode);
 			var errorJson = JSON.parse(result.content);
 			throw new Meteor.Error(result.statusCode, errorJson.error);
 		}
 	},
-
-	fetchAPI: function(message) {
-		var url = "http://10.24.2.125:9000/api/v1/" + message;
+	// fetch form a storyboard API and put into collection
+	fetchAPI: function(methodName) {
+		var url = "http://10.24.2.125:9000/api/v1/" + methodName;
 		//synchronous GET
 		var result = Meteor.http.get(url, {timeout:30000});
 		if(result.statusCode==200) {
-			collectionName = message.charAt(0).toUpperCase() + message.slice(1);
+			// collection names are capitalised
+			collectionName = methodName.charAt(0).toUpperCase() + methodName.slice(1);
 			eval(collectionName).remove({});
 			var respJson = JSON.parse(result.content);
 			console.log("response received.");
@@ -79,7 +44,6 @@ Meteor.methods({
 				respJson[i]["neg_id"] = -1 * respJson[i].id;
 				eval(collectionName).insert(respJson[i]);
 			}
-			return respJson;
 		} else {
 			console.log("Response issue: ", result.statusCode);
 			var errorJson = JSON.parse(result.content);
@@ -87,10 +51,9 @@ Meteor.methods({
 		}
 	}
 });
-
 Meteor.startup(function () {
-
-	// fetch stories, projects and users
+	// read StoryBoard URL
+	// fetch tasks, stories, projects and users
 	Meteor.call("fetchAPI", "stories" , function (error, result) { 
 		if (error) console.log(error);
 		else console.log("stories fetched");
@@ -102,6 +65,9 @@ Meteor.startup(function () {
 	Meteor.call("fetchAPI", "projects" , function (error, result) { 
 		if (error) console.log(error);
 		else console.log("projects fetched");
+	});
+	Meteor.call("fetchAllTasks", function (error, result) {
+		if (error) console.log(error);
 	});
 	// create lanes
 	if ( Lists.find().count() === 0 ) {
