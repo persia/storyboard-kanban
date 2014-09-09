@@ -54,9 +54,6 @@ Meteor.methods({
 Meteor.startup(function () {
 	// read StoryBoard URL
 	// fetch tasks, stories, projects and users
-	Meteor.call("fetchAllTasks", function (error, result) {
-		if (error) console.log(error);
-	});
 	Meteor.call("fetchAPI", "stories" , function (error, result) { 
 		if (error) console.log(error);
 		else console.log("stories fetched");
@@ -68,6 +65,9 @@ Meteor.startup(function () {
 	Meteor.call("fetchAPI", "projects" , function (error, result) { 
 		if (error) console.log(error);
 		else console.log("projects fetched");
+	});
+	Meteor.call("fetchAllTasks", function (error, result) {
+		if (error) console.log(error);
 	});
 	// create lanes
 	if ( Lists.find().count() === 0 ) {
