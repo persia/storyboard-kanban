@@ -73,8 +73,8 @@ Template.link.helpers({
 	}
 });
 // on startup
-StoryURL = "http://10.24.2.125:9000/#!/story/";
-ProjectURL = "http://10.24.2.125:9000/#!/project/";
+StoryURL = "http://127.0.0.1:9000/#!/story/";
+ProjectURL = "http://127.0.0.1:9000/#!/project/";
 filterType = "";
 Session.set('currentID' , 0);
 setIDandTitle(0);

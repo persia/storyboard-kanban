@@ -10,4 +10,5 @@ iron:router
 hellogerard:reststop2
 mrt:collection-api
 http
+cfs:standard-packages
 
