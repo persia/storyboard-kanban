@@ -51,14 +51,15 @@ h5 {
 .list {
     width: 300px ;
     float: left;
-    padding: 2px 8px ;
-    margin: 10px ;
+    padding: 2px 4px ;
+    margin: 4px ;
 }
 
 .menu {
 	color: white;
 	background-color: #444;
 	padding: 4px 8px ;
+	min-width: 1280px ;
 }
 
 .top {
@@ -66,7 +67,13 @@ h5 {
 	color: white;
 	background-color: #c43422;
 	padding: 8px;
+	min-width: 1280px ;
 	height: 50px;
+	border-bottom-right-radius: 20px 20px;
+}
+
+.board {
+    min-width: 1320px ;
 }
 
 .card {
@@ -74,6 +81,11 @@ h5 {
     padding: 4px ;
     word-wrap: break-word;
     background-color: #eee;
+    border: 1px ;
+    border-style: solid;
+    border-color: #333;
+    box-shadow: 4px 4px 4px #888888;
+    border-radius: 8px;
 }
 
 .ui-state-highlight {
