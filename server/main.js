@@ -1,6 +1,6 @@
 Meteor.methods({
 	fetchAllTasks: function() {
-		var url = "http://10.24.2.125:9000/api/v1/tasks";
+		var url = "http://127.0.0.1:9000/api/v1/tasks";
 		var result = Meteor.http.get(url,{timeout:30000});
 		if(result.statusCode==200) {
 			Cards.remove({});
@@ -31,7 +31,7 @@ Meteor.methods({
 	},
 	// fetch form a storyboard API and put into collection
 	fetchAPI: function(methodName) {
-		var url = "http://10.24.2.125:9000/api/v1/" + methodName;
+		var url = "http://127.0.0.1:9000/api/v1/" + methodName;
 		//synchronous GET
 		var result = Meteor.http.get(url, {timeout:30000});
 		if(result.statusCode==200) {
@@ -51,6 +51,30 @@ Meteor.methods({
 		}
 	}
 });
+
+HTTP.methods({
+	'updatecard': function() {
+		return '<b>updatecard not implemented</b>';
+	},
+	'updatestory': function() {
+		return '<b>updatestory not implemented</b>';
+	},
+	'updateproject': function() {
+		return '<b>updateproject not implemented</b>';
+	},
+	'updateallcards': function() {
+		Meteor.call("fetchAllTasks", function (error, result) {
+			if (error) console.log(error);
+		});
+	},
+	'updateallstories': function() {
+		return '<b>updateallstories not implemented</b>';
+	},
+	'updateallprojects': function() {
+		return '<b>updateallprojects not implemented</b>';
+	}
+});
+
 Meteor.startup(function () {
 	// read StoryBoard URL
 	// fetch tasks, stories, projects and users
