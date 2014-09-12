@@ -1,3 +1,8 @@
+html, body {
+	height: 100%;
+	padding: 0;
+}
+
 a:link {
 	color: #ffffff; 
 	text-decoration: underline; 
@@ -34,7 +39,7 @@ ul {
 
 h2 {
     font-family: Arial;
-    color: black;
+    color: white;
     font-size: 18px ;
 }
 
@@ -48,16 +53,52 @@ h5 {
     line-height: 1;
 }
 
+.list_title {
+    background-color: #555;
+    padding: 1px 8px;
+    height: 37px;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+}
+
 .list {
     width: 300px ;
     float: left;
-    padding: 2px 4px ;
-    margin: 4px ;
+    margin: 0px ;
+    margin-right: 5px ;
+    border: 1px ;
+    border-bottom: 0px ;
+    border-style: solid;
+    border-color: #555;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 100%;
+}
+
+select {
+    padding:1px;
+    margin: 0;
+    -webkit-border-radius:1px;
+    -moz-border-radius:1px;
+    border-radius:1px;
+    -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    background: #eee;
+    color: #333;
+    border:none;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+
 }
 
 .menu {
 	color: white;
-	background-color: #444;
+	background-color: #333;
 	padding: 4px 8px ;
 	min-width: 1280px ;
 }
@@ -70,14 +111,18 @@ h5 {
 	min-width: 1280px ;
 	height: 50px;
 	border-bottom-right-radius: 20px 20px;
+	padding-bottom: 10px;
+	margin-bottom: 5px;
 }
 
 .board {
     min-width: 1320px ;
+    height: 100%;
+    min-height: 100%;
 }
 
 .card {
-    margin: 5px ;
+    margin-bottom: 5px ;
     padding: 4px ;
     word-wrap: break-word;
     background-color: #eee;

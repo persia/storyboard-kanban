@@ -22,7 +22,7 @@ function setIDandTitle(id) {
 }
 // templates
 Template.board.helpers({
-	lists: Lists.find({}, {sort: {order: 1}})
+	lists: Lists.find({}, {sort: {order: 1}}),
 });
 Template.card.helpers({
 	otherType: function() {
@@ -41,21 +41,38 @@ Template.story_menu.events({
 		setIDandTitle(parseInt($(evt.target).val()));
 	}
 });
-Template.list.cards = function(status) {
-	id = Session.get('currentID')
-	list_name = Lists.findOne({_id: status, }).name;
-	if (id > 0) {
-		return Cards.find({status: list_name, story_id: id},
-			{sort: {position: 1, task: 1}}
-		);
+Template.list.helpers({
+    cards: function(status) {
+		id = Session.get('currentID')
+		list_name = Lists.findOne({_id: status, }).name;
+		if (id > 0) {
+			return Cards.find({status: list_name, story_id: id},
+				{sort: {position: 1, task: 1}}
+			);
+		}
+		else if ( id <0 ) {
+			return Cards.find({status: list_name, project_id: id * -1},
+				{sort: {position: 1, task: 1}}
+			);
+		}
+		return Cards.find({status: list_name});
+	},
+	listname: function(status) {
+		list_name = Lists.findOne({_id: status, }).name;
+		switch (list_name)
+		{
+		case "todo":
+			return "To Do";
+		case "inprogress":
+			return "In Progress";
+		case "review":
+			return "Review";
+		case "merged":
+			return "Merged";
+		}
 	}
-	else if ( id <0 ) {
-		return Cards.find({status: list_name, project_id: id * -1},
-			{sort: {position: 1, task: 1}}
-		);
-	}
-	return Cards.find({status: list_name});
-};
+});
+
 Template.page_title.helpers({
 	title: function () {
 		return Session.get('currentTitle');
