@@ -49,6 +49,28 @@ Meteor.methods({
 			var errorJson = JSON.parse(result.content);
 			throw new Meteor.Error(result.statusCode, errorJson.error);
 		}
+	},
+	// fetch form a storyboard API and put into collection
+	fetchAPIWithArg: function(methodName, arg, val) {
+		var url = "http://127.0.0.1:9000/api/v1/" + methodName + "?" + arg + "=" + val;
+		console.log(url);
+		//synchronous GET
+		var result = Meteor.http.get(url, {timeout:30000});
+		if(result.statusCode==200) {
+			// collection names are capitalised
+			collectionName = methodName.charAt(0).toUpperCase() + methodName.slice(1);
+			eval(collectionName).remove({});
+			var respJson = JSON.parse(result.content);
+			console.log("response received.");
+			for(var i=0;i<respJson.length;i++){
+				respJson[i]["neg_id"] = -1 * respJson[i].id;
+				eval(collectionName).insert(respJson[i]);
+			}
+		} else {
+			console.log("Response issue: ", result.statusCode);
+			var errorJson = JSON.parse(result.content);
+			throw new Meteor.Error(result.statusCode, errorJson.error);
+		}
 	}
 });
 
@@ -68,17 +90,29 @@ HTTP.methods({
 		});
 	},
 	'updateallstories': function() {
-		return '<b>updateallstories not implemented</b>';
+		Meteor.call("fetchAPIWithArg", "stories", "status", "active", function (error, result) {
+			if (error) console.log(error);
+			else console.log("stories fetched");
+		});
 	},
 	'updateallprojects': function() {
-		return '<b>updateallprojects not implemented</b>';
+		Meteor.call("fetchAPI", "projects" , function (error, result) {
+			if (error) console.log(error);
+			else console.log("projects fetched");
+		});
+	},
+	'updateallusers': function() {
+		Meteor.call("fetchAPI", "users" , function (error, result) {
+			if (error) console.log(error);
+			else console.log("users fetched");
+		});
 	}
 });
 
 Meteor.startup(function () {
 	// read StoryBoard URL
 	// fetch tasks, stories, projects and users
-	Meteor.call("fetchAPI", "stories" , function (error, result) { 
+	Meteor.call("fetchAPIWithArg", "stories", "status", "active", function (error, result) {
 		if (error) console.log(error);
 		else console.log("stories fetched");
 	});
