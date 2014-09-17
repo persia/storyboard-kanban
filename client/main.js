@@ -7,17 +7,14 @@ function setIDandTitle(id) {
 	if(id > 0) {
 		filterType = "story";
 		Session.set('currentID' , id);
-		Session.set('currentTitle', Stories.findOne({"id": id}).title);
 	}
 	else if(id < 0) {
 		filterType = "project";
 		Session.set('currentID' , id);
-		Session.set('currentTitle', Projects.findOne({"id": id * -1}).name);
 	}
 	else {
 		filterType = "";
 		Session.set('currentID' , 0);
-		Session.set('currentTitle', "All Tasks");
 	}
 }
 // templates
@@ -75,12 +72,17 @@ Template.list.helpers({
 
 Template.page_title.helpers({
 	title: function () {
-		return Session.get('currentTitle');
+		var id = Session.get('currentID');
+		if(id > 0)
+			return Stories.findOne({"id": Session.get('currentID')}).title;
+		if(id < 0)
+			return Projects.findOne({"id": Session.get('currentID') * -1}).name;
+		return "All Tasks";
 	}
 });
 Template.link.helpers({
 	link: function () {
-		id = Session.get('currentID');
+		var id = Session.get('currentID');
 		if(id > 0)
 			return StoryURL + id;
 		else if(id < 0)
