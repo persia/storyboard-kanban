@@ -21,6 +21,18 @@ function setIDandTitle(id) {
 Template.board.helpers({
 	lists: Lists.find({}, {sort: {order: 1}}),
 });
+
+Template.board.events = {
+    "click .card": function() {
+        console.log("click card");
+        if ( $('button').length > 0 ) {
+            return false ;
+        }
+        window.location.href = 'http://10.24.2.125:9000' + '/#!/story/' + this.story_id;
+        return false;
+    }
+}
+
 Template.card.helpers({
 	otherType: function() {
 		if(filterType == "story")
@@ -92,8 +104,8 @@ Template.link.helpers({
 	}
 });
 // on startup
-StoryURL = "http://127.0.0.1:9000/#!/story/";
-ProjectURL = "http://127.0.0.1:9000/#!/project/";
+StoryURL = "http://10.24.2.125:9000/#!/story/";
+ProjectURL = "http://10.24.2.125:9000/#!/project/";
 filterType = "";
 Session.set('currentID' , 0);
 setIDandTitle(0);
