@@ -1,6 +1,6 @@
 Meteor.methods({
 	fetchAllTasks: function() {
-		var url = "http://127.0.0.1:9000/api/v1/tasks";
+		var url = "http://10.24.2.125:9000/api/v1/tasks";
 		var result = Meteor.http.get(url,{timeout:30000});
 		if(result.statusCode==200) {
 			Cards.remove({});
@@ -31,7 +31,7 @@ Meteor.methods({
 	},
 	// fetch form a storyboard API and put into collection
 	fetchAPI: function(methodName) {
-		var url = "http://127.0.0.1:9000/api/v1/" + methodName;
+		var url = "http://10.24.2.125:9000/api/v1/" + methodName;
 		//synchronous GET
 		var result = Meteor.http.get(url, {timeout:30000});
 		if(result.statusCode==200) {
@@ -52,7 +52,7 @@ Meteor.methods({
 	},
 	// fetch form a storyboard API and put into collection
 	fetchAPIWithArg: function(methodName, arg, val) {
-		var url = "http://127.0.0.1:9000/api/v1/" + methodName + "?" + arg + "=" + val;
+		var url = "http://10.24.2.125:9000/api/v1/" + methodName + "?" + arg + "=" + val;
 		console.log(url);
 		//synchronous GET
 		var result = Meteor.http.get(url, {timeout:30000});
