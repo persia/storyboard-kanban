@@ -1,3 +1,5 @@
+STORYBOARD_HOST = "http://10.24.2.125:9000"; 
+
 Meteor.methods({
 	fetchAllTasks: function() {
 		var url = "http://10.24.2.125:9000/api/v1/tasks";
@@ -49,6 +51,10 @@ Meteor.methods({
 			var errorJson = JSON.parse(result.content);
 			throw new Meteor.Error(result.statusCode, errorJson.error);
 		}
+	},
+	//send the URL of the storyboard host server to the client
+	getHostURL: function() {
+		return STORYBOARD_HOST;
 	},
 	// fetch form a storyboard API and put into collection
 	fetchAPIWithArg: function(methodName, arg, val) {

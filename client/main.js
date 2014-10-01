@@ -3,6 +3,11 @@ Meteor.subscribe('projects')
 Meteor.subscribe('stories')
 Meteor.subscribe('users')
 
+// Get the URL of the host storyboard from the server
+Meteor.call('getHostURL', function (error, result) {  
+	Session.set('host',result);
+});
+
 function setIDandTitle(id) {
 	if(id > 0) {
 		filterType = "story";
@@ -28,7 +33,7 @@ Template.board.events = {
         if ( $('button').length > 0 ) {
             return false ;
         }
-        window.location.href = 'http://10.24.2.125:9000' + '/#!/story/' + this.story_id;
+        //window.location.href = Session.get('host') + '/#!/story/' + this.story_id;
         return false;
     }
 }
@@ -104,8 +109,8 @@ Template.link.helpers({
 	}
 });
 // on startup
-StoryURL = "http://10.24.2.125:9000/#!/story/";
-ProjectURL = "http://10.24.2.125:9000/#!/project/";
+StoryURL = STORYBOARD_HOST + "/#!/story/";
+ProjectURL = STORYBOARD_HOST + "/#!/project/";
 filterType = "";
 Session.set('currentID' , 0);
 setIDandTitle(0);
