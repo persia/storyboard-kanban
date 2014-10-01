@@ -109,8 +109,8 @@ Template.link.helpers({
 	}
 });
 // on startup
-StoryURL = STORYBOARD_HOST + "/#!/story/";
-ProjectURL = STORYBOARD_HOST + "/#!/project/";
+StoryURL = Session.get('host') + "/#!/story/";
+ProjectURL = Session.get('host') + "/#!/project/";
 filterType = "";
 Session.set('currentID' , 0);
 setIDandTitle(0);
