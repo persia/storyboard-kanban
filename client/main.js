@@ -33,7 +33,7 @@ Template.board.events = {
         if ( $('button').length > 0 ) {
             return false ;
         }
-        //window.location.href = Session.get('host') + '/#!/story/' + this.story_id;
+        window.location.href = Session.get('host') + '/#!/story/' + this.story_id;
         return false;
     }
 }
